@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="margin-left:10%; margin-right:10%">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+
+    <div style="border: 4px solid silver;padding: 50px; margin-top:30px;">
+        <h5>
+            Automatic download of bullk apache files from AZENQOS server
+        </h5>
+        <div>
+            <p>This process is for downloading bunch of apache files from apache server and pass the raw data to MySQL database
+            </p>
+        </div>
+        <div class="row" style="margin-top:25px">
+            @*<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="FileUploader">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <p>Upload one or more files using this form:</p>
+                        <input type="file" name="files" multiple />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="submit" value="Upload" class="btn btn-info" />
+                    </div>
+                </div>
+            </form>*@
+        </div>
+        <div class="text-center">
+            <button class="btn btn-info" onclick="DownlaodApacheFiles()">Download ApacheFiles</button>
+        </div>
+        <div class="text-center" style="margin-top:20px">
+            <button class="btn btn-success" onclick="LoadApacheFilesToMySQL()">Import ApacheFile To MySQL</button>
+        </div>
+    </div>
+</div>
+
+<div id="progress" class="modal">
+    <div class="center">
+        <div>
+            <div>
+                <div class="loader" id="StatisticsDataLoader" style="margin-top: 20px; margin-left:220px"></div>
+            </div>
+            <div id="loadingMessage">
+                <p class="w-100 text-center" id="loadMessage">Processing...</p>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-danger" onclick=" window.location.reload()">Stop</button>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    
+    function DownlaodApacheFiles()
+    {
+        var url = "@Url.Action("ApacheFilesDownload","Home")";
+        LoadWithProgressModal(url, "#progress");
+    }
+
+    function LoadApacheFilesToMySQL()
+    {
+        var url = "@Url.Action("LoadApacheFilesToMySQL","Home")";
+        LoadWithProgressModal(url, "#progress");
+    }
+
+</script>
